@@ -14,6 +14,17 @@ app.use(express.static(publicPath))
 io.on('connection',(socket)=>{
     console.log("new user connected",socket.id);
    
+    socket.emit('newMessage',{
+        from: 'Admin',
+        text: "hey welcome to the group",
+        createdAt: new Date().getTime()
+    })
+    socket.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: "new user joined",
+        createdAt: new Date().getTime()
+    })
+
     socket.on('disconnect',()=>{
         console.log(`user ${socket.id} disconnected`)
     })
@@ -25,6 +36,11 @@ io.on('connection',(socket)=>{
             text: data.text,
             createdAt: new Date().getTime()
         })
+        // socket.broadcast.emit('newMessage', {
+        //     from: data.from,
+        //     text: data.text,
+        //     createdAt: new Date().getTime()
+        // })
     })
   
 })
