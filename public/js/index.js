@@ -9,3 +9,10 @@ socket.on('disconnect', function () {
 socket.on('newMessage', function (data) {
     console.log("new message",data);
 });
+
+socket.emit('createMessage',  {
+    from : "nani ji",
+    text: "ki hal hai putti"
+},function(data){
+    console.log(data)
+});

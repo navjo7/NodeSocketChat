@@ -22,9 +22,10 @@ io.on('connection',(socket)=>{
         console.log(`user ${socket.id} disconnected`)
     })
 
-    socket.on('createMessage',(data)=>{
+    socket.on('createMessage',(data,callback)=>{
         console.log("createMessage", data)
         io.emit('newMessage', generateMessage(data.from,data.text))
+        callback("this is from server")
         // socket.broadcast.emit('newMessage', {
         //     from: data.from,
         //     text: data.text,
