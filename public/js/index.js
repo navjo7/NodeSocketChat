@@ -12,13 +12,15 @@ socket.on('newMessage', function (data) {
     li.text(`${data.from}: ${data.text} `)
     jQuery('#messages').append(li)
 });
+socket.on('newLocationMessage', function (data) {
+    var li = jQuery('<li></li>');
+    var a = jQuery('<a target="_blank">My current location</a>')
+    li.text(`${data.from}: `)
+    a.attr('href',data.url)
+    li.append(a)
+    jQuery('#messages').append(li)
+});
 
-// socket.emit('createMessage',  {
-//     from : "nani ji",
-//     text: "ki hal hai putti"
-// },function(data){
-//     console.log(data)
-// });
 
 jQuery('#chatForm').on('submit',function(e){
     e.preventDefault();
