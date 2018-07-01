@@ -13,8 +13,18 @@ app.use(express.static(publicPath))
 
 io.on('connection',(socket)=>{
     console.log("new user connected",socket.id);
+   
     socket.on('disconnect',()=>{
         console.log(`user ${socket.id} disconnected`)
+    })
+
+    socket.on('createMessage',(data)=>{
+        console.log("createMessage", data)
+    })
+    socket.emit('newMessage',{
+        from: 'God',
+        text: "bless you",
+        createdAt: 123
     })
 })
 
