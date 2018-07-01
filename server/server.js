@@ -20,12 +20,13 @@ io.on('connection',(socket)=>{
 
     socket.on('createMessage',(data)=>{
         console.log("createMessage", data)
+        io.emit('newMessage',{
+            from: data.from,
+            text: data.text,
+            createdAt: new Date().getTime()
+        })
     })
-    socket.emit('newMessage',{
-        from: 'God',
-        text: "bless you",
-        createdAt: 123
-    })
+  
 })
 
 
