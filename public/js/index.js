@@ -30,3 +30,19 @@ jQuery('#chatForm').on('submit',function(e){
         console.log(err)
     });
 });
+
+var locationButton = jQuery('#sendLocation');
+locationButton.on('click',function(){
+    if(!navigator.geolocation){
+        return alert("turn on the location")
+    }
+    navigator.geolocation.getCurrentPosition(function(position){
+        socket.emit('createLocation',{
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        })
+        console.log(position)
+    },function(err){
+        alert('unable to fetch the location')
+    })
+})

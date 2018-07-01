@@ -26,11 +26,10 @@ io.on('connection',(socket)=>{
         console.log("createMessage", data)
         io.emit('newMessage', generateMessage(data.from,data.text))
         callback("this is from server")
-        // socket.broadcast.emit('newMessage', {
-        //     from: data.from,
-        //     text: data.text,
-        //     createdAt: new Date().getTime()
-        // })
+    })
+    socket.on('createLocation', (data) => {
+        console.log("createLocation", data)
+        io.emit('newMessage', generateMessage('Admin', `${data.latitude}, ${data.longitude} `))
     })
   
 })
